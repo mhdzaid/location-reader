@@ -1,0 +1,17 @@
+version: '2'
+services:
+  location-reader-db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: location
+      POSTGRES_PASSWORD: location
+#      POSTGRES_DB: jitpaydb
+    ports:
+      - 5434:5432
+    volumes:
+      - data_location_reader:/var/lib/postgresql/data
+
+volumes:
+  data_location_reader:
+    driver: local
+

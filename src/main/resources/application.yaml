@@ -1,0 +1,33 @@
+spring:
+  application:
+    name:
+      location-reader-client
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://localhost:5434/location
+    username: location
+    password: location
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    database: POSTGRESQL
+    #    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    url: jdbc:postgresql://localhost:5434/location
+    schemas: public
+    user: location
+    password: location
+    locations: classpath:db/migration
+
+server:
+  port: 0
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true

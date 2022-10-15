@@ -5,10 +5,7 @@ import com.api.locationreader.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -27,5 +24,18 @@ public class LocationController
         return ResponseEntity.ok().body(response);
     }
 
+    @PostMapping("/api/user/{userId}/location/partition")
+    public ResponseEntity<Void> getUserLocationPartition(@PathVariable String userId)
+    {
+        locationService.createPartitionByUserId(UUID.fromString(userId));
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/api/user/{userId}/location/partition")
+    public ResponseEntity<Void> deletePartition(@PathVariable String userId)
+    {
+        locationService.deletePartitionByUserId(UUID.fromString(userId));
+        return ResponseEntity.ok().build();
+    }
 
 }

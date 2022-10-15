@@ -32,4 +32,20 @@ public class LocationRepositoryImpl implements LocationRepository
         return location;
     }
 
+    @Override
+    public void createPartitionByUserId(UUID userId)
+    {
+        String partitionTableName = "location_partition_" + userId.toString().replace('-', '_');
+        String sqlQuery = "CREATE TABLE IF NOT EXISTS "+partitionTableName+" PARTITION OF location FOR VALUES IN ('"+userId.toString()+"')";
+        jdbcTemplate.execute(sqlQuery);
+    }
+
+    @Override
+    public void deletePartitionByUserId(UUID userId)
+    {
+        String partitionTableName = "location_partition_" + userId.toString().replace('-', '_');
+        String sqlQuery = "DROP TABLE IF EXISTS "+partitionTableName+" cascade";
+        jdbcTemplate.execute(sqlQuery);
+    }
+
 }

@@ -11,4 +11,8 @@ public interface LocationService
     void createLocation(LocationCreationRequest request);
 
     LocationResponse getLatestLocationOfUser(UUID userId);
+
+    void deletePartitionByUserId(UUID userId);
+
+    void createPartitionByUserId(UUID userId);
 }

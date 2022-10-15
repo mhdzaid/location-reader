@@ -34,4 +34,16 @@ public class LocationServiceImpl implements LocationService
         Location location =  locationRepository.getLatestLocationOfUser(userId);
         return locationMapper.locationToLocationResponse(location);
     }
+
+    @Override
+    public void deletePartitionByUserId(UUID userId)
+    {
+        locationRepository.deletePartitionByUserId(userId);
+    }
+
+    @Override
+    public void createPartitionByUserId(UUID userId)
+    {
+        locationRepository.createPartitionByUserId(userId);
+    }
 }

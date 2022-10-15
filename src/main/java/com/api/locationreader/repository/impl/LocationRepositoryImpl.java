@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -46,6 +48,14 @@ public class LocationRepositoryImpl implements LocationRepository
         String partitionTableName = "location_partition_" + userId.toString().replace('-', '_');
         String sqlQuery = "DROP TABLE IF EXISTS "+partitionTableName+" cascade";
         jdbcTemplate.execute(sqlQuery);
+    }
+
+    @Override
+    public List<Location> getAllLocationsByUserIdAndDateRange(UUID userId, LocalDateTime startDate, LocalDateTime endDate, Integer page, Integer size)
+    {
+        String query = "select * from location where user_id = ? and created_on >= ? and created_on <= ? limit ? offset ?";
+        List<Location> locations = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Location.class), userId, startDate, endDate, size, page);
+        return locations;
     }
 
 }

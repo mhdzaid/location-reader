@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface LocationService
 {
-    void createLocation(LocationCreationRequest request);
+    void createLocation(Location request);
 
     LocationResponse getLatestLocationOfUser(UUID userId);
 

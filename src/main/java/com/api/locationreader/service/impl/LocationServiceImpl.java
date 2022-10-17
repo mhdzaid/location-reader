@@ -25,10 +25,9 @@ public class LocationServiceImpl implements LocationService
     private final LocationMapper locationMapper;
 
     @Override
-    public void createLocation(LocationCreationRequest request)
+    public void createLocation(Location request)
     {
-        Location location = locationMapper.locationRequestToLocation(request);
-        locationRepository.createLocation(location);
+        locationRepository.createLocation(request);
     }
 
     @Override

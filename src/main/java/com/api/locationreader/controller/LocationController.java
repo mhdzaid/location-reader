@@ -21,6 +21,11 @@ public class LocationController
 {
     private final LocationService locationService;
 
+    /**
+     * API to get latest user location
+     * @param userId
+     * @return
+     */
     @GetMapping("/api/user/{userId}/location/_latest")
     public ResponseEntity<LocationResponse> getLatestUserLocation(@PathVariable String userId)
     {
@@ -28,6 +33,15 @@ public class LocationController
         return ResponseEntity.ok().body(response);
     }
 
+    /**
+     * API to get locations of a user in a time frame.
+     * @param userId
+     * @param page
+     * @param size
+     * @param startDate
+     * @param endDate
+     * @return Locations
+     */
     @GetMapping("/api/user/{userId}/location")
     public ResponseEntity<UserLocationsResponse> getAllLocationsOfUser(@PathVariable String userId,
                                                                         @RequestParam("page") Integer page,
@@ -40,6 +54,11 @@ public class LocationController
         return ResponseEntity.ok().body(response);
     }
 
+    /**
+     * API to create partition based on user_id
+     * @param userId
+     * @return
+     */
     @PostMapping("/api/user/{userId}/location/partition")
     public ResponseEntity<Void> getUserLocationPartition(@PathVariable String userId)
     {
@@ -47,6 +66,11 @@ public class LocationController
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * API to delete partiton
+     * @param userId
+     * @return
+     */
     @DeleteMapping("/api/user/{userId}/location/partition")
     public ResponseEntity<Void> deletePartition(@PathVariable String userId)
     {

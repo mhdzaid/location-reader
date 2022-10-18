@@ -1,6 +1,5 @@
 package com.api.locationreader.service.impl;
 
-import com.api.locationreader.dto.LocationCreationRequest;
 import com.api.locationreader.dto.LocationResponse;
 import com.api.locationreader.dto.UserLocationsResponse;
 import com.api.locationreader.mapper.LocationMapper;
@@ -24,12 +23,21 @@ public class LocationServiceImpl implements LocationService
 
     private final LocationMapper locationMapper;
 
+    /**
+     * Create Location
+     * @param request
+     */
     @Override
     public void createLocation(Location request)
     {
         locationRepository.createLocation(request);
     }
 
+    /**
+     * Get latest user location
+     * @param userId
+     * @return
+     */
     @Override
     public LocationResponse getLatestLocationOfUser(UUID userId)
     {
@@ -37,6 +45,15 @@ public class LocationServiceImpl implements LocationService
         return locationMapper.locationToLocationResponse(location);
     }
 
+    /**
+     * Get all locations of a user in a given time frame
+     * @param userId
+     * @param startDate
+     * @param endDate
+     * @param page
+     * @param size
+     * @return
+     */
     @Override
     public UserLocationsResponse getUserLocationResponse(UUID userId, LocalDateTime startDate, LocalDateTime endDate,
                                                          Integer page, Integer size) {
@@ -44,12 +61,20 @@ public class LocationServiceImpl implements LocationService
         return locationMapper.createFromLocationsAndUser(userId, locations);
     }
 
+    /**
+     * Delete partition
+     * @param userId
+     */
     @Override
     public void deletePartitionByUserId(UUID userId)
     {
         locationRepository.deletePartitionByUserId(userId);
     }
 
+    /**
+     * Create partition
+     * @param userId
+     */
     @Override
     public void createPartitionByUserId(UUID userId)
     {

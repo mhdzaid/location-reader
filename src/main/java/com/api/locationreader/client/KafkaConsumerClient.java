@@ -14,7 +14,10 @@ public class KafkaConsumerClient
 {
     private final LocationService locationService;
 
-
+    /**
+     * Receives location data from location-reader microservice
+     * @param location
+     */
     @KafkaListener(topics = "${location.kafka.location-topic}", containerFactory = "providerKafkaListenerContainerFactory")
     public void kafkaVehicleListener(Location location) {
 

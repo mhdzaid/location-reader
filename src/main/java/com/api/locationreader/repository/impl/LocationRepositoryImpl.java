@@ -17,6 +17,10 @@ public class LocationRepositoryImpl implements LocationRepository
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    /**
+     * Create location with incremental primary key id
+     * @param location
+     */
     @Override
     public void createLocation(Location location)
     {
@@ -26,6 +30,11 @@ public class LocationRepositoryImpl implements LocationRepository
 
     }
 
+    /**
+     * Get latest location of user which would be the last inserted row in the partition
+     * @param userId
+     * @return
+     */
     @Override
     public Location getLatestLocationOfUser(UUID userId)
     {
@@ -34,6 +43,10 @@ public class LocationRepositoryImpl implements LocationRepository
         return location;
     }
 
+    /**
+     * Create partition when user is created
+     * @param userId
+     */
     @Override
     public void createPartitionByUserId(UUID userId)
     {
@@ -42,6 +55,10 @@ public class LocationRepositoryImpl implements LocationRepository
         jdbcTemplate.execute(sqlQuery);
     }
 
+    /**
+     * Delete partition of a user incase user is deleted
+     * @param userId
+     */
     @Override
     public void deletePartitionByUserId(UUID userId)
     {
@@ -50,6 +67,15 @@ public class LocationRepositoryImpl implements LocationRepository
         jdbcTemplate.execute(sqlQuery);
     }
 
+    /**
+     * Request created using JdbcTemplate to get all locations of user in a time frame
+     * @param userId
+     * @param startDate
+     * @param endDate
+     * @param page
+     * @param size
+     * @return
+     */
     @Override
     public List<Location> getAllLocationsByUserIdAndDateRange(UUID userId, LocalDateTime startDate, LocalDateTime endDate, Integer page, Integer size)
     {

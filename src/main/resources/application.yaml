@@ -14,13 +14,6 @@ spring:
     #    show-sql: true
     hibernate:
       ddl-auto: none
-  kafka:
-    consumer:
-      bootstrap-servers: localhost:9092
-      group-id: group_id
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
   flyway:
     url: jdbc:postgresql://localhost:5434/location

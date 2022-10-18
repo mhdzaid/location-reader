@@ -1,1 +1,1 @@
-create table location (id bigint not null , user_id uuid not null, latitude decimal, longitude decimal, created_on timestamp, primary key (id, user_id)) PARTITION BY LIST (user_id);
+create table location (id bigserial not null , user_id uuid not null, latitude double precision, longitude double precision, created_on timestamp, primary key (id, user_id)) PARTITION BY LIST (user_id);
